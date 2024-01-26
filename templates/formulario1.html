@@ -1,0 +1,20 @@
+
+
+{% extends "index.html"%}
+{% block content%}
+<form action="/resultado" method="POST">
+    <label>N1:</label>
+    <input type="text" name="n1"/>
+    <label>N2:</label>
+    <input type="text" name="n2"/>
+    <input type="submit"/>
+    <select id="operaciones" name="operaciones">
+        <option value="suma">suma</option>
+        <option value="resta">resta</option>
+        <option value="multiplicacion">multiplicacion</option>
+        <option value="division">division</option>
+    </select>
+    <label>TU RESULTADO ES:{{r}}</label>
+
+</form>
+   {% endblock%} 
