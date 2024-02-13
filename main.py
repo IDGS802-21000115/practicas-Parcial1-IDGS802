@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request
 from CalcularDistacia import puntos
 import forms
+from oroscopo import CalcularsignoZodiacal
 app = Flask(__name__)
 
 @app.route("/")
@@ -59,6 +60,34 @@ def calculoPuntos():
     r=puntos(x1,x2,y1,y2)
     result=r.puntos()
     return render_template("formulaPuntos.html", form=form, result=result)
+@app.route("/oroscopo",methods=["GET","POST"])
+def oro():
+    form=forms.UserForm(request.form)
+    return render_template("formularioOroscopo.html", form=form)
+
+@app.route("/resultadoOro",methods=["GET","POST"])
+def calculoResistencias():
+    nombre=""
+    Apaterno=""
+    Amaterno=""
+    dia=""
+    mes=""
+    anio=""
+    
+    form=forms.UserForm(request.form)
+    if request.method == "POST":
+        nombre = form.nombre.data
+        Apaterno = form.Apaterno.data
+        Amaterno = form.Amaterno.data
+        dia = int(form.dia.data)
+        mes = int(form.mes.data)
+        anio =int(form.anio.data)
+    
+    r=CalcularsignoZodiacal(nombre,Apaterno,Amaterno,dia,mes,anio)
+    result=r.signo()
+    result2=result[0]
+    img=result[1]
+    return render_template("formulaOro2.html", form=form, result=result2, img=img)
 
 if __name__ == "__main__":
     app.run(debug=True)

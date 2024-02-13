@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+ 
+{%block content%}
+{%import "_macros.html" as macros%}
+<h1>Signo zodical</h1>
+ 
+<form action="/resultadoOro", method="POST", id="miformulario">
+    {{macros.input_Form(form.nombre, class="form-control")}}
+    {{macros.input_Form(form.Apaterno, class="form-control")}}
+    {{macros.input_Form(form.Amaterno, class="form-control")}}  
+    {{macros.input_Form(form.dia, class="form-control")}}  
+    {{macros.input_Form(form.mes, class="form-control")}}  
+    {{macros.input_Form(form.anio, class="form-control")}}   
+    {{macros.input_Form(form.radios, class="form-control")}}  
+    <input type="submit" name="btn1">
+    
+    <button type="button" onclick="limpiarCampos()">Limpiar Campos</button>
+</form>
+
+<script>
+    function limpiarCampos() {
+        document.getElementById("miformulario").reset();
+    }
+</script>
+{%endblock%}
