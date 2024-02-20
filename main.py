@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request
 from CalcularDistacia import puntos
 import forms
+from guaradadopalabras import Guardar
 from oroscopo import CalcularsignoZodiacal
 app = Flask(__name__)
 
@@ -88,6 +89,27 @@ def calculoResistencias():
     result2=result[0]
     img=result[1]
     return render_template("formulaOro2.html", form=form, result=result2, img=img)
+
+
+@app.route("/guardarPalabras",methods=["GET","POST"])
+def diccionario():
+    palabra_Ingles=""
+    palabra_Español=""
+    pal=""
+    palabra=""
+    
+    form=forms.UserForm(request.form)
+    if request.method == "POST":
+        palabra_Ingles = form.palabra_Ingles.data
+        palabra_Español = form.palabra_Español.data
+        pal=form.pal.data
+        palabra=form.palabra.data
+    r=Guardar(palabra_Ingles,palabra_Español,pal,palabra)
+    result = r.buscar() or ""
+    
+    result2 = r.apalabra() or ""
+    
+    return render_template("diccionario.html", form=form, result=result, result2=result2)
 
 if __name__ == "__main__":
     app.run(debug=True)

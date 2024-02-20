@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+ 
+{%block content%}
+{%import "_macros.html" as macros%}
+<h1>Diccionario</h1>
+ 
+<form action="", method="POST", id="">
+    {{macros.input_Form(form.palabra_Ingles, class="form-control")}}
+    {{macros.input_Form(form.palabra_Español, class="form-control")}}
+    
+    <input type="submit" name="btn1">
+    
+  
+</form>
+{% if 'btn1' in request.form %}
+    <h1>{{ result2 }}</h1>
+  {% endif %}
+<form action="", method="POST", id="">
+    {{macros.input_Form(form.palabra, class="form-control")}}
+    {{macros.input_Form(form.pal, class="form-control")}}
+    <input type="submit" name="btn2">
+    
+    
+    
+</form>
+
+{% if 'btn2' in request.form %}
+    <h1>{{ result }}</h1>
+  {% endif %}
+{%endblock%}
